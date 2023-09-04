@@ -5,7 +5,7 @@
  * Author: Sallehuddin Abdul Latif (sallehuddin@berrypay.com)
  * Company: BerryPay (M) Sdn. Bhd.
  * --------------------------------------
- * Last Modified: Sunday September 3rd 2023 18:39:52 +0800
+ * Last Modified: Monday September 4th 2023 13:00:49 +0800
  * Modified By: Sallehuddin Abdul Latif (sallehuddin@berrypay.com)
  * --------------------------------------
  * Copyright (c) 2023 BerryPay (M) Sdn. Bhd.
@@ -111,12 +111,14 @@ func InitializeLogger(maxSize int, maxBackups int, maxAge int, compress bool, lo
 	case "fatal":
 		ZapLevel = zapcore.FatalLevel
 	default:
+		fmt.Println("Unrecognized log level specified... defaulting to info.")
 		ZapLevel = zapcore.InfoLevel
 	}
 
 	// Default log level for debug mode is "debug"
 	envAppEnv := os.Getenv("APP_ENV")
 	if envAppEnv == "debug" {
+		fmt.Println("Debug app environment detected... forcing log level to debug.")
 		ZapLevel = zapcore.DebugLevel
 	}
 
@@ -147,6 +149,7 @@ func ChangeLogLevel(level string) {
 	case "fatal":
 		ZapLevel = zapcore.FatalLevel
 	default:
+		Logger.Warn("Unrecognized log level specified... defaulting to info.")
 		ZapLevel = zapcore.InfoLevel
 	}
 
