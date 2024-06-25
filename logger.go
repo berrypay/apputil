@@ -5,7 +5,7 @@
  * Author: Sallehuddin Abdul Latif (sallehuddin@berrypay.com)
  * Company: BerryPay (M) Sdn. Bhd.
  * --------------------------------------
- * Last Modified: Monday September 4th 2023 13:00:49 +0800
+ * Last Modified: Tuesday June 25th 2024 16:52:38 +0800
  * Modified By: Sallehuddin Abdul Latif (sallehuddin@berrypay.com)
  * --------------------------------------
  * Copyright (c) 2023 BerryPay (M) Sdn. Bhd.
@@ -110,6 +110,9 @@ func InitializeLogger(maxSize int, maxBackups int, maxAge int, compress bool, lo
 		ZapLevel = zapcore.PanicLevel
 	case "fatal":
 		ZapLevel = zapcore.FatalLevel
+	case "":
+		fmt.Println("No log level specified... defaulting to info.")
+		ZapLevel = zapcore.InfoLevel
 	default:
 		fmt.Println("Unrecognized log level specified... defaulting to info.")
 		ZapLevel = zapcore.InfoLevel
