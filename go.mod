@@ -4,8 +4,9 @@ go 1.21.0
 
 require (
 	github.com/muyo/sno v1.2.1
-	go.uber.org/zap v1.25.0
+	github.com/vishal-bihani/go-tsid v1.0.3
+	go.uber.org/zap v1.27.0
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1
 )
 
-require go.uber.org/multierr v1.10.0 // indirect
+require go.uber.org/multierr v1.11.0 // indirect

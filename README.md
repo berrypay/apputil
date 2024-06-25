@@ -8,3 +8,7 @@ Application utility functions for enterprise software development
 
 - General utility functions
   - IsEmptyJson: check if given data is an empty JSON object
+
+## Version 1.2.0
+
+- Add Time Sorted ID features from github.com/vishal-bihani/go-tsid
