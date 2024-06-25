@@ -5,7 +5,7 @@
  * Author: Sallehuddin Abdul Latif (sallehuddin@berrypay.com)
  * Company: BerryPay (M) Sdn. Bhd.
  * --------------------------------------
- * Last Modified: Tuesday June 25th 2024 15:09:22 +0800
+ * Last Modified: Tuesday June 25th 2024 15:45:26 +0800
  * Modified By: Sallehuddin Abdul Latif (sallehuddin@berrypay.com)
  * --------------------------------------
  * Copyright (c) 2023 BerryPay (M) Sdn. Bhd.
@@ -14,6 +14,7 @@
 package apputil
 
 import (
+	"strconv"
 	"time"
 
 	"github.com/muyo/sno"
@@ -218,6 +219,27 @@ func GenerateTsidNumber() int64 {
 	}
 
 	return id.ToNumber()
+}
+
+func GenerateExtendedTsidNumber(options ...bool) string {
+	tsidFactory, err := tsid.TsidFactoryBuilder().
+		WithNodeBits(nodeBits).
+		WithNode(nodeId).
+		WithCustomEpoch(epoch).
+		Build()
+	if err != nil {
+		Logger.Warn(MSG_CREATE_FACTORY_ERROR)
+
+		return getExtendedTsid(strconv.FormatInt(tsid.Fast().ToNumber(), 10), options...)
+	}
+
+	id, err := tsidFactory.Generate()
+	if err != nil {
+		Logger.Warn(MSG_TSID_GENERATE_ERROR)
+		id = tsid.Fast()
+	}
+
+	return getExtendedTsid(strconv.FormatInt(id.ToNumber(), 10), options...)
 }
 
 func GenerateTsidBytes(options ...bool) []byte {
